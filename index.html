@@ -1,2237 +1,622 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق الخدمات - للجميع</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #e74c3c;
-            --accent-color: #3498db;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --gray-color: #95a5a6;
-            --success-color: #2ecc71;
-            --warning-color: #f39c12;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --border-radius: 8px;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-        
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* رأس الموقع */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 0;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            font-size: 28px;
-            color: var(--secondary-color);
-            margin-left: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-        }
-        
-        .logo span {
-            font-size: 14px;
-            color: var(--accent-color);
-            margin-right: 10px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-right: 20px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-            padding: 5px 10px;
-            border-radius: var(--border-radius);
-        }
-        
-        nav ul li a:hover {
-            color: var(--secondary-color);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .user-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            color: white;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .user-info i {
-            margin-left: 8px;
-            font-size: 18px;
-        }
-        
-        .user-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 200px;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            z-index: 1000;
-            margin-top: 10px;
-        }
-        
-        .user-info:hover .user-dropdown {
-            display: block;
-        }
-        
-        .user-dropdown a {
-            display: block;
-            padding: 12px 15px;
-            color: var(--primary-color);
-            text-decoration: none;
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.3s;
-        }
-        
-        .user-dropdown a:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .user-dropdown a i {
-            margin-left: 10px;
-            color: var(--accent-color);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 8px 20px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            font-size: 14px;
-        }
-        
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: white;
-            border: 1px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-success {
-            background-color: var(--success-color);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background-color: #27ae60;
-        }
-        
-        .btn-danger {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-        
-        .add-service-btn {
-            background-color: var(--success-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-        
-        .add-service-btn:hover {
-            background-color: #27ae60;
-        }
-        
-        .add-service-btn i {
-            margin-right: 8px;
-        }
-        
-        .contact-header {
-            display: flex;
-            align-items: center;
-            color: white;
-            background-color: var(--accent-color);
-            padding: 8px 15px;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-        }
-        
-        .contact-header:hover {
-            background-color: #2980b9;
-        }
-        
-        .contact-header i {
-            margin-left: 8px;
-        }
-        
-        /* قسم البطل */
-        .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .hero h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            background-color: white;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .search-box input {
-            flex: 1;
-            padding: 15px 25px;
-            border: none;
-            font-size: 16px;
-            outline: none;
-        }
-        
-        .search-box button {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 0 30px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-        
-        .search-box button:hover {
-            background-color: #c0392b;
-        }
-        
-        /* قسم الخدمات */
-        .featured-services {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--primary-color);
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary-color);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            min-height: 300px;
-        }
-        
-        .no-services {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px 20px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-        
-        .no-services i {
-            font-size: 60px;
-            color: var(--gray-color);
-            margin-bottom: 20px;
-        }
-        
-        .no-services h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .no-services p {
-            color: var(--gray-color);
-            max-width: 500px;
-            margin: 0 auto 25px;
-        }
-        
-        .service-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-image {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .service-card:hover .service-image img {
-            transform: scale(1.05);
-        }
-        
-        .service-content {
-            padding: 20px;
-        }
-        
-        .service-content h3 {
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-        
-        .service-content p {
-            color: var(--gray-color);
-            margin-bottom: 15px;
-            height: 60px;
-            overflow: hidden;
-        }
-        
-        .service-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .service-category {
-            background-color: var(--light-color);
-            color: var(--primary-color);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        
-        .service-price {
-            color: var(--secondary-color);
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .service-time {
-            font-size: 12px;
-            color: var(--gray-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .service-time i {
-            margin-left: 5px;
-        }
-        
-        .service-user {
-            font-size: 12px;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .service-user i {
-            margin-left: 5px;
-        }
-        
-        .service-actions {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .service-actions .btn {
-            padding: 6px 12px;
-            font-size: 13px;
-        }
-        
-        .contact-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            width: 100%;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .contact-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .contact-btn i {
-            margin-left: 8px;
-        }
-        
-        /* نماذج */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            width: 90%;
-            max-width: 600px;
-            border-radius: var(--border-radius);
-            padding: 30px;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--gray-color);
-        }
-        
-        .form-title {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-size: 16px;
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .password-input {
-            position: relative;
-        }
-        
-        .toggle-password {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--gray-color);
-        }
-        
-        .form-switch {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        
-        .form-switch a {
-            color: var(--accent-color);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        
-        .form-switch a:hover {
-            text-decoration: underline;
-        }
-        
-        .submit-btn {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        
-        .submit-btn:hover {
-            background-color: #c0392b;
-        }
-        
-        .error-message {
-            background-color: rgba(231, 76, 60, 0.1);
-            color: var(--secondary-color);
-            padding: 10px;
-            border-radius: var(--border-radius);
-            margin-bottom: 15px;
-            text-align: center;
-            display: none;
-        }
-        
-        .success-message {
-            background-color: rgba(46, 204, 113, 0.1);
-            color: var(--success-color);
-            padding: 10px;
-            border-radius: var(--border-radius);
-            margin-bottom: 15px;
-            text-align: center;
-            display: none;
-        }
-        
-        /* تحسينات لحقل رفع الصورة */
-        .image-upload-container {
-            border: 2px dashed #ddd;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.3s;
-            margin-bottom: 15px;
-        }
-        
-        .image-upload-container:hover {
-            border-color: var(--accent-color);
-        }
-        
-        .image-upload-container i {
-            font-size: 40px;
-            color: var(--gray-color);
-            margin-bottom: 10px;
-        }
-        
-        .image-upload-container p {
-            color: var(--gray-color);
-            margin-bottom: 10px;
-        }
-        
-        .image-preview {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: var(--border-radius);
-            display: none;
-            margin-top: 10px;
-        }
-        
-        .image-upload-container.has-image {
-            border-style: solid;
-            padding: 10px;
-        }
-        
-        .remove-image-btn {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 12px;
-            margin-top: 10px;
-        }
-        
-        /* قسم ملف المستخدم الشخصي */
-        .profile-section {
-            padding: 60px 0;
-            background-color: #f5f5f5;
-        }
-        
-        .profile-container {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 40px;
-            box-shadow: var(--shadow);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .profile-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-        }
-        
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: white;
-            margin-left: 20px;
-        }
-        
-        .profile-info h2 {
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        
-        .profile-info p {
-            color: var(--gray-color);
-        }
-        
-        .profile-stats {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 15px;
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            flex: 1;
-        }
-        
-        .stat-item .number {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--accent-color);
-            display: block;
-        }
-        
-        .stat-item .label {
-            font-size: 14px;
-            color: var(--gray-color);
-        }
-        
-        /* قسم الاتصال */
-        .contact-section {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .contact-item {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            width: 250px;
-            transition: transform 0.3s;
-        }
-        
-        .contact-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .contact-item i {
-            font-size: 36px;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-        
-        .contact-item h3 {
-            margin-bottom: 10px;
-        }
-        
-        /* تذييل الصفحة */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 40px 0 20px;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column {
-            width: 30%;
-            min-width: 250px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column h3 {
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background-color: var(--secondary-color);
-            bottom: 0;
-            right: 0;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-column ul li a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-column ul li a:hover {
-            color: var(--accent-color);
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .social-icons a:hover {
-            background-color: var(--accent-color);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
-            font-size: 14px;
-        }
-        
-        /* تصميم متجاوب */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 5px 10px;
-            }
-            
-            .user-actions {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
-            .hero h2 {
-                font-size: 28px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .search-box {
-                flex-direction: column;
-                border-radius: var(--border-radius);
-            }
-            
-            .search-box input,
-            .search-box button {
-                width: 100%;
-                border-radius: 0;
-            }
-            
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .profile-avatar {
-                margin-left: 0;
-                margin-bottom: 15px;
-            }
-            
-            .profile-stats {
-                flex-direction: column;
-            }
-            
-            .footer-column {
-                width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>وسام مارت - لوحة الإدارة</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z' /%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Tajawal:wght@200;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#059669', primaryDark: '#047857', primaryLight: '#10B981', dark: '#0C1222', darkLight: '#162032', cardBg: '#1A2942' }, fontFamily: { display: ['Almarai', 'sans-serif'], body: ['Tajawal', 'sans-serif'] } } } }
+  </script>
+  <style>
+    :root {
+      --bg: #0C1222;
+      --bg-light: #162032;
+      --card: #1A2942;
+      --primary: #059669;
+      --primary-light: #10B981;
+      --danger: #ef4444;
+      --text: #f1f5f9;
+      --muted: #94A3B8;
+      --border: #2D3B4F;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(ellipse at 20% 20%, rgba(5, 150, 105, 0.1) 0%, transparent 50%), var(--bg);
+    }
+
+    .login-box {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      margin-bottom: 16px;
+      font-size: 15px;
+      transition: border-color 0.2s;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .btn {
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      transition: all 0.2s;
+      text-align: center;
+      display: inline-block;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .dashboard {
+      display: none;
+    }
+
+    .dashboard.active {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: var(--bg-light);
+      border-left: 1px solid var(--border);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .main-area {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      background: var(--bg);
+    }
+
+    .nav-btn {
+      padding: 12px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: rgba(5, 150, 105, 0.1);
+      color: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 15px;
+      word-wrap: break-word;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 28px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #4B5563;
+      transition: .3s;
+      border-radius: 28px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked+.slider {
+      background-color: var(--primary);
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(24px);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-light);
+      border-radius: 20px;
+      padding: 24px;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid var(--border);
+      transform: scale(0.9);
+      transition: transform 0.3s;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: scale(1);
+    }
+
+    .option-box {
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 15px;
+    }
+
+    /* تنسيق صورة الإيصال داخل لوحة الإدارة */
+    .receipt-preview {
+      max-width: 100%;
+      max-height: 250px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid var(--border);
+    }
+
+    .receipt-preview:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(5, 150, 105, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .dashboard.active {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px solid var(--border);
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 5px;
+      }
+
+      .sidebar .mb-8 {
+        margin-bottom: 0;
+        margin-left: 10px;
+        width: 100%;
+      }
+
+      .nav-btn {
+        margin-bottom: 0;
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      .sidebar .mt-auto {
+        margin-top: 0;
+        margin-right: auto;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- رأس الموقع -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-handshake"></i>
-                    <div>
-                        <h1>سوق الخدمات</h1>
-                        <span>للجميع</span>
-                    </div>
-                </div>
-                
-                <nav>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
-                        <li><a href="#featured"><i class="fas fa-star"></i> الخدمات</a></li>
-                        <li><a href="#contact"><i class="fas fa-phone-alt"></i> اتصل بنا</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="user-actions" id="userActions">
-                    <!-- سيتم عرض أزرار التسجيل أو معلومات المستخدم هنا -->
-                </div>
-            </div>
-        </div>
-    </header>
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <div
+        class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primaryLight flex items-center justify-center mx-auto mb-5 shadow-lg">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+          </path>
+        </svg></div>
+      <h1 class="text-2xl font-bold font-display mb-2">لوحة الإدارة</h1>
+      <p class="text-gray-400 text-sm mb-6">وسام مارت</p>
+      <form onsubmit="handleLogin(event)">
+        <input type="text" id="userInput" class="input-field" placeholder="اسم المستخدم" required>
+        <input type="password" id="passInput" class="input-field" placeholder="كلمة المرور" required>
+        <p class="text-red-400 text-sm mb-3 hidden" id="errorMsg">بيانات الدخول غير صحيحة</p>
+        <button type="submit" class="btn btn-primary">دخول</button>
+      </form>
+    </div>
+  </div>
 
-    <!-- قسم البطل -->
-    <section class="hero">
-        <div class="container">
-            <h2>موقعك لعرض وطلب الخدمات بسهولة</h2>
-            <p>منصة متكاملة للجميع! سجل مجاناً وأضف خدماتك أو ابحث عن الخدمة التي تحتاجها.</p>
-            
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="ما الخدمة التي تبحث عنها؟ (مثال: تصميم مواقع، صيانة منزلية، تدريس خصوصي...)">
-                <button id="searchButton"><i class="fas fa-search"></i> بحث</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الخدمات -->
-    <section class="featured-services" id="featured">
-        <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                <h2 class="section-title" style="margin-bottom: 0;">الخدمات المتاحة</h2>
-                <button class="add-service-btn" id="openServiceFormBtnMain" style="display: none;">
-                    <i class="fas fa-plus-circle"></i> أضف خدمة جديدة
-                </button>
-            </div>
-            
-            <div class="services-grid" id="servicesContainer">
-                <!-- سيتم إضافة الخدمات ديناميكياً هنا -->
-                <div class="no-services" id="noServicesMessage">
-                    <i class="fas fa-box-open"></i>
-                    <h3>لا توجد خدمات حالياً</h3>
-                    <p>كن أول من يضيف خدمة! سجل الآن وأضف خدمتك.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم ملف المستخدم الشخصي -->
-    <section class="profile-section" id="profileSection" style="display: none;">
-        <div class="container">
-            <div class="profile-container" id="profileContainer">
-                <!-- سيتم عرض ملف المستخدم الشخصي هنا -->
-            </div>
-        </div>
-    </section>
-
-    <!-- نموذج إضافة خدمة -->
-    <div class="modal" id="addServiceModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeServiceModal">&times;</button>
-            <h2 class="form-title">أضف خدمة جديدة</h2>
-            <div class="error-message" id="addServiceError"></div>
-            
-            <form id="serviceForm">
-                <div class="form-group">
-                    <label for="serviceTitle">عنوان الخدمة</label>
-                    <input type="text" id="serviceTitle" placeholder="اكتب عنوان واضح للخدمة" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="serviceDescription">وصف الخدمة</label>
-                    <textarea id="serviceDescription" placeholder="صف الخدمة اللي تقدمها بالتفصيل..." required></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="serviceCategory">فئة الخدمة</label>
-                    <select id="serviceCategory" required>
-                        <option value="">اختر فئة</option>
-                        <option value="تقنية">تقنية</option>
-                        <option value="تعليمية">تعليمية</option>
-                        <option value="منزلية">منزلية</option>
-                        <option value="تصميم">تصميم</option>
-                        <option value="كتابة وترجمة">كتابة وترجمة</option>
-                        <option value="صيانة">صيانة</option>
-                        <option value="أخرى">أخرى</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="servicePrice">السعر (ريال سعودي)</label>
-                    <input type="number" id="servicePrice" placeholder="مثال: 500" required>
-                </div>
-                
-                <!-- حقل رفع الصورة -->
-                <div class="form-group">
-                    <label for="serviceImage">صورة الخدمة (اختياري)</label>
-                    <div class="image-upload-container" id="imageUploadContainer">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>انقر لرفع صورة للخدمة</p>
-                        <small>الحجم الأقصى: 5MB. الصيغ المسموحة: JPG, PNG</small>
-                        <input type="file" id="serviceImage" accept="image/*" style="display: none;">
-                        <img id="imagePreview" class="image-preview" alt="معاينة الصورة">
-                        <button type="button" class="remove-image-btn" id="removeImageBtn" style="display: none;">إزالة الصورة</button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="contactPhone">رقم الواتساب / الجوال</label>
-                    <input type="tel" id="contactPhone" placeholder="مثال: 0506152188" required>
-                </div>
-                
-                <button type="submit" class="submit-btn">إضافة الخدمة</button>
-            </form>
-        </div>
+  <div class="dashboard" id="dashBoard">
+    <div class="sidebar">
+      <div class="mb-8">
+        <h2 class="text-lg font-bold font-display text-white">وسام مارت</h2>
+        <p class="text-xs text-gray-400" id="roleDisplay">لوحة التحكم</p>
+      </div>
+      <div id="nav-products" class="nav-btn active" onclick="showTab('products')">المنتجات</div>
+      <div id="nav-add" class="nav-btn" onclick="showTab('add')">إضافة منتج</div>
+      <div id="nav-users" class="nav-btn" onclick="showTab('users')">المستخدمين</div>
+      <div id="nav-orders" class="nav-btn" onclick="showTab('orders')">الطلبات</div>
+      <div id="nav-settings" class="nav-btn" onclick="showTab('settings')">الإعدادات</div>
+      <div class="mt-auto pt-4 border-t border-gray-700"><button class="btn btn-danger text-sm"
+          onclick="logout()">خروج</button></div>
     </div>
 
-    <!-- نموذج تسجيل الدخول -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeLoginModal">&times;</button>
-            <h2 class="form-title">تسجيل الدخول</h2>
-            <div class="error-message" id="loginError"></div>
-            <div class="success-message" id="loginSuccess"></div>
-            
-            <form id="loginFormElement">
-                <div class="form-group">
-                    <label for="loginEmail">البريد الإلكتروني أو اسم المستخدم</label>
-                    <input type="text" id="loginEmail" placeholder="البريد الإلكتروني أو اسم المستخدم" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="loginPassword">كلمة المرور</label>
-                    <div class="password-input">
-                        <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
-                        <button type="button" class="toggle-password" id="toggleLoginPassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <button type="submit" class="submit-btn">تسجيل الدخول</button>
-                
-                <div class="form-switch">
-                    ليس لديك حساب؟ <a href="#" id="switchToRegister">سجل الآن</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نموذج التسجيل -->
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeRegisterModal">&times;</button>
-            <h2 class="form-title">إنشاء حساب جديد</h2>
-            <div class="error-message" id="registerError"></div>
-            <div class="success-message" id="registerSuccess"></div>
-            
-            <form id="registerFormElement">
-                <div class="form-group">
-                    <label for="registerUsername">اسم المستخدم</label>
-                    <input type="text" id="registerUsername" placeholder="اسم المستخدم (لا يسمح بالتكرار)" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="registerEmail">البريد الإلكتروني</label>
-                    <input type="email" id="registerEmail" placeholder="البريد الإلكتروني (لا يسمح بالتكرار)" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="registerPassword">كلمة المرور</label>
-                    <div class="password-input">
-                        <input type="password" id="registerPassword" placeholder="كلمة المرور (8 أحرف على الأقل)" required>
-                        <button type="button" class="toggle-password" id="toggleRegisterPassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="registerConfirmPassword">تأكيد كلمة المرور</label>
-                    <div class="password-input">
-                        <input type="password" id="registerConfirmPassword" placeholder="تأكيد كلمة المرور" required>
-                        <button type="button" class="toggle-password" id="toggleRegisterConfirmPassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <button type="submit" class="submit-btn">إنشاء حساب</button>
-                
-                <div class="form-switch">
-                    لديك حساب بالفعل؟ <a href="#" id="switchToLogin">سجل الدخول</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نموذج تعديل الملف الشخصي -->
-    <div class="modal" id="profileModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeProfileModal">&times;</button>
-            <h2 class="form-title">تعديل الملف الشخصي</h2>
-            <div class="error-message" id="profileError"></div>
-            <div class="success-message" id="profileSuccess"></div>
-            
-            <form id="profileFormElement">
-                <div class="form-group">
-                    <label for="profileUsername">اسم المستخدم</label>
-                    <input type="text" id="profileUsername" placeholder="اسم المستخدم الجديد" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="profileEmail">البريد الإلكتروني</label>
-                    <input type="email" id="profileEmail" placeholder="البريد الإلكتروني الجديد" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="currentPassword">كلمة المرور الحالية (مطلوبة للتعديل)</label>
-                    <div class="password-input">
-                        <input type="password" id="currentPassword" placeholder="كلمة المرور الحالية" required>
-                        <button type="button" class="toggle-password" id="toggleCurrentPassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="newPassword">كلمة المرور الجديدة (اختياري)</label>
-                    <div class="password-input">
-                        <input type="password" id="newPassword" placeholder="كلمة المرور الجديدة">
-                        <button type="button" class="toggle-password" id="toggleNewPassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirmNewPassword">تأكيد كلمة المرور الجديدة</label>
-                    <div class="password-input">
-                        <input type="password" id="confirmNewPassword" placeholder="تأكيد كلمة المرور الجديدة">
-                        <button type="button" class="toggle-password" id="toggleConfirmNewPassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <button type="submit" class="submit-btn">حفظ التعديلات</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- قسم الاتصال -->
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <h2 class="section-title">تواصل معنا</h2>
-            <p>لأي استفسار أو مساعدة تقنية في الموقع، لا تتردد في التواصل معنا:</p>
-            
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <h3>الهاتف والواتساب</h3>
-                    <p>0506152188</p>
-                    <p>24/7</p>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fas fa-user"></i>
-                    <h3>المصمم والمطور</h3>
-                    <p>وسام الشراري</p>
-                    <p>مطور واجهات ويب</p>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>خدمات التصميم</h3>
-                    <p>تصميم مواقع وتطبيقات</p>
-                    <p>تطوير حلول تقنية</p>
-                </div>
+    <div class="main-area">
+      <div id="tab-products" class="tab-content">
+        <h2 class="text-2xl font-bold font-display mb-6">المنتجات</h2>
+        <div id="productsList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+      <div id="tab-users" class="tab-content hidden">
+        <h2 class="text-2xl font-bold font-display mb-6">المستخدمين المسجلين</h2>
+        <div id="usersList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+      <div id="tab-add" class="tab-content hidden">
+        <h2 class="text-2xl font-bold font-display mb-6">إضافة منتج جديد</h2>
+        <div class="card max-w-md border-2 border-dashed border-primary/30">
+          <form onsubmit="handleAddProduct(event)">
+            <label class="block text-sm text-gray-400 mb-1">القسم</label>
+            <select id="pStoreType" class="input-field" required>
+              <option value="market">بقالات</option>
+              <option value="restaurant">مطاعم</option>
+              <option value="coffee">كوفي</option>
+              <option value="coffeeMudhal">كوفي مدهال</option>
+              <option value="veggies">خضار وفواكه</option>
+              <option value="homemade">إسر منتجات</option>
+            </select>
+            <label class="block text-sm text-gray-400 mb-1 mt-3">اسم المنتج</label><input type="text" id="pName"
+              class="input-field" required>
+            <label class="block text-sm text-gray-400 mb-1 mt-3">السعر (ريال)</label><input type="text" id="pPrice"
+              class="input-field" required placeholder="مثال: 10 ريال">
+            <label class="block text-sm text-gray-400 mb-1 mt-3">الفئة الفرعية (اختياري)</label><select id="pCategory"
+              class="input-field">
+              <option value="drinks">مشروبات</option>
+              <option value="dairy">ألبان</option>
+              <option value="food">أغذية</option>
+              <option value="snacks">سناكس</option>
+            </select>
+            <div class="option-box">
+              <h4 class="font-bold text-sm text-primary mb-2">خيارات المنتج (اختياري)</h4>
+              <p class="text-xs text-gray-500 mb-3">مثال: اسم الخاصية (الحرارة)، الخيارات (حار, بارد). اتركها فارغة إذا
+                لا توجد خيارات.</p>
+              <label class="block text-sm text-gray-400 mb-1">اسم الخاصية</label><input type="text" id="pOptionName"
+                class="input-field" placeholder="مثال: الحرارة">
+              <label class="block text-sm text-gray-400 mb-1 mt-3">الخيارات (افصل بفاصلة)</label><input type="text"
+                id="pOptionValues" class="input-field" placeholder="مثال: حار, بارد, مثلج">
             </div>
+            <label class="block text-sm text-gray-400 mb-1 mt-3">رابط الصورة</label><input type="url" id="pImage"
+              class="input-field" required placeholder="https://...">
+            <button type="submit" class="btn btn-primary mt-4" id="addBtn">إضافة المنتج</button>
+          </form>
         </div>
-    </section>
-
-    <!-- تذييل الصفحة -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>سوق الخدمات</h3>
-                    <p>منصة مجانية للجميع! سجل وأضف خدماتك مجاناً أو ابحث عن ما تحتاجه.</p>
-                    <div class="social-icons">
-                        <a href="https://wa.me/966506152188"><i class="fab fa-whatsapp"></i></a>
-                        <a href="tel:0506152188"><i class="fas fa-phone-alt"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>روابط سريعة</h3>
-                    <ul>
-                        <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#featured">الخدمات المتاحة</a></li>
-                        <li><a href="#contact">اتصل بنا</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>فئات الخدمات</h3>
-                    <ul>
-                        <li><a href="#">تقنية المعلومات</a></li>
-                        <li><a href="#">التعليم والتدريس</a></li>
-                        <li><a href="#">الخدمات المنزلية</a></li>
-                        <li><a href="#">التصميم والفنون</a></li>
-                        <li><a href="#">الكتابة والترجمة</a></li>
-                    </ul>
-                </div>
+      </div>
+      <div id="tab-orders" class="tab-content hidden">
+        <h2 class="text-2xl font-bold font-display mb-6">الطلبات</h2>
+        <div class="card mb-6"
+          style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, var(--card) 100%); border-color: rgba(37, 99, 235, 0.5);">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div>
+              <h3 class="text-lg text-blue-300 font-bold">أرباح التوصيل (الشهر الحالي)</h3>
+              <p class="text-xs text-blue-400/70">يتم حساب الرسوم لكل طلب يتم تأكيد دفع حسابه</p>
             </div>
-            
-            <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; سوق الخدمات - للجميع 2023 | هاتف: 0506152188</p>
-            </div>
+            <h2 class="text-3xl font-bold text-white" id="monthlyDeliveryRevenue">0 ريال</h2>
+          </div>
         </div>
-    </footer>
+        <div id="ordersList"></div>
+      </div>
+      <div id="tab-settings" class="tab-content hidden">
+        <h2 class="text-2xl font-bold font-display mb-6">إعدادات الموقع</h2>
+        <div class="card max-w-md mb-6">
+          <h3 class="font-bold text-lg mb-2">رسوم التوصيل</h3>
+          <p class="text-gray-400 text-sm mb-3">تعديل رسوم التوصيل لجميع الطلبات (ريال). سيتم تحديثه فوراً في المتجر.
+          </p>
+          <div class="flex gap-2 mb-3">
+            <input type="number" id="deliveryFeeInput" class="input-field flex-1" placeholder="أدخل السعر"
+              style="margin-bottom:0" min="0">
+            <button onclick="saveDeliveryFee()" class="btn btn-primary"
+              style="width:auto; padding:10px 20px;">حفظ</button>
+          </div>
+          <p id="currentDeliveryFeeStatus" class="text-sm text-yellow-400">جاري التحميل...</p>
+        </div>
+        <div class="card max-w-md mb-6">
+          <h3 class="font-bold text-lg mb-4">التحكم في الأقسام</h3>
+          <p class="text-gray-400 text-sm mb-4">قم بإغلاق أي قسم ليظهر للعميل بشريط أحمر "قريباً".</p>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between"><span class="font-bold">البقالات</span><label
+                class="switch"><input type="checkbox" id="catToggle-market"
+                  onchange="toggleCategory('market', this.checked)" checked><span class="slider"></span></label></div>
+            <div class="flex items-center justify-between"><span class="font-bold">المطاعم</span><label
+                class="switch"><input type="checkbox" id="catToggle-restaurant"
+                  onchange="toggleCategory('restaurant', this.checked)" checked><span class="slider"></span></label>
+            </div>
+            <div class="flex items-center justify-between"><span class="font-bold">كوفي</span><label
+                class="switch"><input type="checkbox" id="catToggle-coffee"
+                  onchange="toggleCategory('coffee', this.checked)" checked><span class="slider"></span></label></div>
+            <div class="flex items-center justify-between"><span class="font-bold">خضار وفواكه</span><label
+                class="switch"><input type="checkbox" id="catToggle-veggies"
+                  onchange="toggleCategory('veggies', this.checked)" checked><span class="slider"></span></label></div>
+            <div class="flex items-center justify-between"><span class="font-bold">إسر منتجات</span><label
+                class="switch"><input type="checkbox" id="catToggle-homemade"
+                  onchange="toggleCategory('homemade', this.checked)" checked><span class="slider"></span></label></div>
+          </div>
+        </div>
+        <div class="card max-w-md mb-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-lg">وضع الصيانة</h3>
+              <p class="text-gray-400 text-sm">عند التفعيل، سيتم إغلاق المتجر أمام الزبائن.</p>
+            </div><label class="switch"><input type="checkbox" id="maintenanceToggle"
+                onchange="toggleMaintenance(this.checked)"><span class="slider"
+                style="background-color: #ef4444;"></span></label>
+          </div>
+          <div id="maintenanceStatus" class="mt-4 text-sm text-gray-400">جاري التحميل...</div>
+        </div>
+        <div class="card max-w-md">
+          <h3 class="font-bold text-lg mb-2">كود الخصم (التوصيل المجاني)</h3>
+          <p class="text-gray-400 text-sm mb-3">كود يستخدم لمرة واحدة فقط.</p>
+          <div class="flex gap-2 mb-3"><input type="text" id="promoCodeInput" class="input-field flex-1"
+              placeholder="أدخل الكود" style="margin-bottom:0"><button onclick="savePromoCode()" class="btn btn-primary"
+              style="width:auto; padding:10px 20px; background:#8B5CF6">حفظ</button></div>
+          <p id="currentPromoStatus" class="text-sm text-yellow-400">جاري التحميل...</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        // =================== المتغيرات العالمية ===================
-        let currentUser = null;
-        let services = [];
-        let users = [];
-        
-        // =================== عناصر DOM ===================
-        const userActions = document.getElementById('userActions');
-        const servicesContainer = document.getElementById('servicesContainer');
-        const noServicesMessage = document.getElementById('noServicesMessage');
-        const openServiceFormBtnMain = document.getElementById('openServiceFormBtnMain');
-        const profileSection = document.getElementById('profileSection');
-        const profileContainer = document.getElementById('profileContainer');
-        
-        // النماذج
-        const addServiceModal = document.getElementById('addServiceModal');
-        const loginModal = document.getElementById('loginModal');
-        const registerModal = document.getElementById('registerModal');
-        const profileModal = document.getElementById('profileModal');
-        
-        // أزرار الفتح والإغلاق
-        const closeServiceModal = document.getElementById('closeServiceModal');
-        const closeLoginModal = document.getElementById('closeLoginModal');
-        const closeRegisterModal = document.getElementById('closeRegisterModal');
-        const closeProfileModal = document.getElementById('closeProfileModal');
-        
-        // النماذج
-        const serviceForm = document.getElementById('serviceForm');
-        const loginFormElement = document.getElementById('loginFormElement');
-        const registerFormElement = document.getElementById('registerFormElement');
-        const profileFormElement = document.getElementById('profileFormElement');
-        
-        // عناصر رفع الصور
-        const imageUploadContainer = document.getElementById('imageUploadContainer');
-        const serviceImageInput = document.getElementById('serviceImage');
-        const imagePreview = document.getElementById('imagePreview');
-        const removeImageBtn = document.getElementById('removeImageBtn');
-        
-        // عناصر البحث
-        const searchInput = document.getElementById('searchInput');
-        const searchButton = document.getElementById('searchButton');
-        
-        // رسائل الخطأ والنجاح
-        const loginError = document.getElementById('loginError');
-        const loginSuccess = document.getElementById('loginSuccess');
-        const registerError = document.getElementById('registerError');
-        const registerSuccess = document.getElementById('registerSuccess');
-        const addServiceError = document.getElementById('addServiceError');
-        const profileError = document.getElementById('profileError');
-        const profileSuccess = document.getElementById('profileSuccess');
-        
-        // =================== تهيئة التطبيق ===================
-        document.addEventListener('DOMContentLoaded', function() {
-            initApp();
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-xl font-bold font-display">تعديل المنتج</h3><button onclick="closeEditModal()"
+          class="text-gray-400 hover:text-white text-2xl">&times;</button>
+      </div>
+      <form onsubmit="handleUpdateProduct(event)">
+        <input type="hidden" id="editId">
+        <label class="block text-sm text-gray-400 mb-1">القسم</label>
+        <select id="editStoreType" class="input-field" required>
+          <option value="market">بقالات</option>
+          <option value="restaurant">مطاعم</option>
+          <option value="coffee">كوفي</option>
+          <option value="coffeeMudhal">كوفي مدهال</option>
+          <option value="veggies">خضار وفواكه</option>
+          <option value="homemade">إسر منتجات</option>
+        </select>
+        <label class="block text-sm text-gray-400 mb-1 mt-3">اسم المنتج</label><input type="text" id="editName"
+          class="input-field" required>
+        <label class="block text-sm text-gray-400 mb-1 mt-3">السعر (ريال)</label><input type="text" id="editPrice"
+          class="input-field" required>
+        <label class="block text-sm text-gray-400 mb-1 mt-3">الفئة الفرعية</label><select id="editCategory"
+          class="input-field">
+          <option value="drinks">مشروبات</option>
+          <option value="dairy">ألبان</option>
+          <option value="food">أغذية</option>
+          <option value="snacks">سناكس</option>
+        </select>
+        <div class="option-box">
+          <h4 class="font-bold text-sm text-primary mb-2">خيارات المنتج</h4>
+          <label class="block text-sm text-gray-400 mb-1">اسم الخاصية</label><input type="text" id="editOptionName"
+            class="input-field" placeholder="مثال: الحرارة">
+          <label class="block text-sm text-gray-400 mb-1 mt-3">الخيارات (افصل بفاصلة)</label><input type="text"
+            id="editOptionValues" class="input-field" placeholder="مثال: حار, بارد, مثلج">
+        </div>
+        <label class="block text-sm text-gray-400 mb-1 mt-3">رابط الصورة</label><input type="url" id="editImage"
+          class="input-field" required>
+        <div class="flex gap-3 mt-5"><button type="submit" class="btn btn-primary flex-1">حفظ التعديلات</button><button
+            type="button" onclick="closeEditModal()" class="btn btn-danger flex-1"
+            style="background: #4B5563;">إلغاء</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = { apiKey: "AIzaSyA2N_lsZ7yyvT1kIydXFkW_fLVFH0kQRBk", authDomain: "wessam-8ac1d.firebaseapp.com", projectId: "wessam-8ac1d", storageBucket: "wessam-8ac1d.firebasestorage.app", messagingSenderId: "140878579052", appId: "1:140878579052:web:53a52b34a176171cf6df49" };
+    const app = initializeApp(firebaseConfig); const db = getFirestore(app); const auth = getAuth(app);
+    let cachedProducts = [];
+    const loginScreen = document.getElementById('loginScreen'); const dashBoard = document.getElementById('dashBoard');
+
+    function formatOrderDate(timestamp) {
+      if (!timestamp) return 'غير معروف';
+      const date = timestamp.toDate();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true };
+      let formatted = date.toLocaleDateString('ar-SA', options);
+      formatted = formatted.replace(/ ص\b/, ' صباحاً').replace(/ م\b/, ' مساءً');
+      return formatted;
+    }
+
+    onAuthStateChanged(auth, (user) => { if (user) { setupDashboard('admin'); } else { loginScreen.style.display = 'flex'; dashBoard.classList.remove('active'); } });
+    window.handleLogin = async (e) => { e.preventDefault(); document.getElementById('errorMsg').classList.add('hidden'); const username = document.getElementById('userInput').value.trim(); const password = document.getElementById('passInput').value; let email = username; if (!username.includes('@')) { email = username + '@admin.com'; } try { await signInWithEmailAndPassword(auth, email, password); } catch (err) { document.getElementById('errorMsg').classList.remove('hidden'); document.getElementById('errorMsg').innerText = "خطأ في اسم المستخدم أو كلمة المرور"; } };
+    window.logout = async () => { await signOut(auth); };
+
+    function setupDashboard(role) { loginScreen.style.display = 'none'; dashBoard.classList.add('active'); document.getElementById('roleDisplay').innerText = 'وضع المدير'; initFirebaseListeners(); initMaintenanceListener(); initPromoListener(); initCategoryListener(); initDeliveryFeeListener(); }
+    window.showTab = (name) => { document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden')); document.getElementById('tab-' + name).classList.remove('hidden'); document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); const activeBtn = document.getElementById('nav-' + name); if (activeBtn) activeBtn.classList.add('active'); };
+
+    function initCategoryListener() { onSnapshot(doc(db, 'settings', 'categories'), (snap) => { const cats = ['market', 'restaurant', 'coffee', 'veggies', 'homemade']; if (snap.exists()) { const data = snap.data(); cats.forEach(c => { const toggle = document.getElementById(`catToggle-${c}`); if (toggle) toggle.checked = data[c] !== false; }); } }); }
+    window.toggleCategory = async (cat, isChecked) => { try { await setDoc(doc(db, 'settings', 'categories'), { [cat]: isChecked }, { merge: true }); } catch (e) { alert("خطأ في تحديث القسم: " + e.message); } };
+
+    function initMaintenanceListener() { onSnapshot(doc(db, 'settings', 'maintenance'), (docSnap) => { if (docSnap.exists()) { const data = docSnap.data(); const isActive = data.active || false; const toggle = document.getElementById('maintenanceToggle'); const statusText = document.getElementById('maintenanceStatus'); if (toggle) toggle.checked = isActive; if (statusText) { statusText.innerText = isActive ? "الحالة: المتجر مغلق 🔴" : "الحالة: المتجر مفتوح 🟢"; statusText.className = isActive ? "mt-4 text-sm text-red-400 font-bold" : "mt-4 text-sm text-green-400"; } } }); }
+    window.toggleMaintenance = async (isChecked) => { const statusText = document.getElementById('maintenanceStatus'); if (statusText) statusText.innerText = "جاري الحفظ..."; try { await setDoc(doc(db, 'settings', 'maintenance'), { active: isChecked, updatedAt: new Date() }); } catch (e) { alert("حدث خطأ أثناء تحديث الحالة: " + e.message); } };
+
+    function initPromoListener() { onSnapshot(doc(db, 'settings', 'promoCode'), (docSnap) => { const statusText = document.getElementById('currentPromoStatus'); const input = document.getElementById('promoCodeInput'); if (docSnap.exists()) { const data = docSnap.data(); input.value = data.code || ''; if (data.used) { statusText.innerText = "الحالة: تم استخدامه بالفعل 😐"; statusText.className = "text-sm text-red-400"; } else { statusText.innerText = "الحالة: متاح للاستخدام ✅"; statusText.className = "text-sm text-green-400"; } } else { statusText.innerText = "لم يتم إنشاء كود بعد"; statusText.className = "text-sm text-yellow-400"; } }); }
+    window.savePromoCode = async () => { const code = document.getElementById('promoCodeInput').value.trim(); if (!code) return alert("الرجاء إدخال الكود أولاً"); try { await setDoc(doc(db, 'settings', 'promoCode'), { code: code, used: false }); alert("تم حفظ/تحديث الكود بنجاح!"); } catch (e) { alert("خطأ: " + e.message); } };
+
+    function initDeliveryFeeListener() { onSnapshot(doc(db, 'settings', 'delivery'), (docSnap) => { const statusText = document.getElementById('currentDeliveryFeeStatus'); const input = document.getElementById('deliveryFeeInput'); if (docSnap.exists() && docSnap.data().fee !== undefined) { const fee = docSnap.data().fee; input.value = fee; statusText.innerText = `رسوم التوصيل الحالية: ${fee} ريال ✅`; statusText.className = "text-sm text-green-400"; } else { input.value = 10; statusText.innerText = "لم يتم تحديد الرسوم بعد (الافتراضي 10 ريال)"; statusText.className = "text-sm text-yellow-400"; } }); }
+    window.saveDeliveryFee = async () => { const feeVal = parseFloat(document.getElementById('deliveryFeeInput').value); if (isNaN(feeVal) || feeVal < 0) return alert("الرجاء إدخال رقم صالح"); try { await setDoc(doc(db, 'settings', 'delivery'), { fee: feeVal }); alert("تم تحديث رسوم التوصيل بنجاح!"); } catch (e) { alert("خطأ: " + e.message); } };
+
+    function initFirebaseListeners() {
+      onSnapshot(collection(db, 'products'), (snap) => {
+        cachedProducts = []; const list = document.getElementById('productsList');
+        if (snap.empty) return list.innerHTML = '<p class="text-gray-400 col-span-full text-center py-10">لا توجد منتجات</p>';
+        let html = '';
+        snap.forEach(d => {
+          const p = d.data(); cachedProducts.push({ id: d.id, ...p });
+          let storeTypeLabel = p.storeType === 'market' ? 'بقالات' : p.storeType === 'restaurant' ? 'مطاعم' : p.storeType === 'coffee' ? 'كوفي' : p.storeType === 'coffeeMudhal' ? 'كوفي مدهال' : p.storeType === 'veggies' ? 'خضار وفواكه' : p.storeType === 'homemade' ? 'إسر منتجات' : 'غير محدد';
+          let priceDisplay = p.price; if (typeof priceDisplay === 'string' && !priceDisplay.includes('ريال')) priceDisplay += ' ريال';
+          let optionsDisplay = '';
+          if (p.options && p.options.length > 0) { optionsDisplay = `<div class="mt-2 pt-2 border-t border-gray-700 flex items-center gap-1 flex-wrap"><span class="text-xs text-purple-400 font-bold">${p.optionName || 'خيار'}:</span> ${p.options.map(o => `<span class="text-xs bg-purple-900/30 text-purple-300 px-2 py-0.5 rounded">${o}</span>`).join('')}</div>`; }
+          html += `<div class="card"><span class="text-xs bg-blue-900/40 text-blue-300 px-2 py-1 rounded mb-2 inline-block">${storeTypeLabel}</span><img src="${p.image}" class="w-full h-32 object-cover rounded-lg mb-2 bg-gray-800" onerror="this.src='https://via.placeholder.com/300x180?text=صورة'"><h3 class="font-bold mb-1">${p.name}</h3><p class="text-green-400 font-bold mb-2">${priceDisplay}</p>${optionsDisplay}<div class="grid grid-cols-2 gap-2 mt-3"><button onclick="openEditModal('${d.id}')" class="btn btn-primary text-xs" style="padding:8px">تعديل</button><button onclick="deleteProd('${d.id}')" class="btn btn-danger text-xs" style="padding:8px">حذف</button></div></div>`;
         });
-        
-        function initApp() {
-            // تحميل البيانات من localStorage
-            loadUsers();
-            loadServices();
-            
-            // تحميل المستخدم الحالي
-            loadCurrentUser();
-            
-            // عرض واجهة المستخدم المناسبة
-            updateUserUI();
-            
-            // تحميل الخدمات وعرضها
-            renderServices();
-            
-            // إعداد مستمعي الأحداث
-            setupEventListeners();
-        }
-        
-        // =================== إدارة المستخدمين ===================
-        function loadUsers() {
-            const usersData = localStorage.getItem('users');
-            users = usersData ? JSON.parse(usersData) : [];
-            
-            // إذا لم يكن هناك مستخدمين، نضيف مستخدمين افتراضيين
-            if (users.length === 0) {
-                users = [
-                    {
-                        id: 1,
-                        username: "وسام",
-                        email: "wesam@example.com",
-                        password: hashPassword("12345678"),
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: 2,
-                        username: "أحمد",
-                        email: "ahmed@example.com",
-                        password: hashPassword("12345678"),
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: 3,
-                        username: "سارة",
-                        email: "sara@example.com",
-                        password: hashPassword("12345678"),
-                        createdAt: new Date().toISOString()
-                    }
-                ];
-                saveUsers();
-            }
-        }
-        
-        function loadCurrentUser() {
-            const currentUserData = sessionStorage.getItem('currentUser');
-            if (currentUserData) {
-                currentUser = JSON.parse(currentUserData);
-            }
-        }
-        
-        function saveUsers() {
-            localStorage.setItem('users', JSON.stringify(users));
-        }
-        
-        function saveCurrentUser() {
-            if (currentUser) {
-                sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
-            } else {
-                sessionStorage.removeItem('currentUser');
-            }
-        }
-        
-        function hashPassword(password) {
-            // دالة تشفير بسيطة
-            let hash = 0;
-            for (let i = 0; i < password.length; i++) {
-                const char = password.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash;
-            }
-            return hash.toString();
-        }
-        
-        function isUsernameTaken(username, excludeUserId = null) {
-            return users.some(user => 
-                user.username.toLowerCase() === username.toLowerCase() && 
-                user.id !== excludeUserId
-            );
-        }
-        
-        function isEmailTaken(email, excludeUserId = null) {
-            return users.some(user => 
-                user.email.toLowerCase() === email.toLowerCase() && 
-                user.id !== excludeUserId
-            );
-        }
-        
-        function registerUser(username, email, password) {
-            // التحقق من أن البريد الإلكتروني غير مسجل مسبقاً
-            if (isEmailTaken(email)) {
-                showError(registerError, 'البريد الإلكتروني مسجل مسبقاً');
-                return false;
-            }
-            
-            // التحقق من أن اسم المستخدم غير مستخدم
-            if (isUsernameTaken(username)) {
-                showError(registerError, 'اسم المستخدم موجود مسبقاً');
-                return false;
-            }
-            
-            // إنشاء المستخدم الجديد
-            const newUser = {
-                id: Date.now(),
-                username,
-                email,
-                password: hashPassword(password),
-                createdAt: new Date().toISOString()
-            };
-            
-            users.push(newUser);
-            saveUsers();
-            
-            // تسجيل الدخول تلقائياً بعد التسجيل
-            loginUser(email, password);
-            
-            return true;
-        }
-        
-        function loginUser(identifier, password) {
-            // البحث عن المستخدم بالبريد الإلكتروني أو اسم المستخدم
-            const user = users.find(user => 
-                user.email.toLowerCase() === identifier.toLowerCase() || 
-                user.username.toLowerCase() === identifier.toLowerCase()
-            );
-            
-            if (!user) {
-                showError(loginError, 'البريد الإلكتروني/اسم المستخدم أو كلمة المرور غير صحيحة');
-                return false;
-            }
-            
-            if (user.password !== hashPassword(password)) {
-                showError(loginError, 'البريد الإلكتروني/اسم المستخدم أو كلمة المرور غير صحيحة');
-                return false;
-            }
-            
-            // تسجيل الدخول
-            currentUser = {
-                id: user.id,
-                username: user.username,
-                email: user.email
-            };
-            
-            // حفظ حالة تسجيل الدخول
-            saveCurrentUser();
-            
-            // تحديث واجهة المستخدم
-            updateUserUI();
-            
-            // إغلاق نموذج تسجيل الدخول
-            loginModal.style.display = 'none';
-            
-            // عرض رسالة نجاح
-            showSuccess(loginSuccess, `مرحباً ${user.username}! تم تسجيل الدخول بنجاح`);
-            
-            return true;
-        }
-        
-        function updateUserProfile(username, email, currentPassword, newPassword) {
-            if (!currentUser) return false;
-            
-            // البحث عن المستخدم الحالي
-            const userIndex = users.findIndex(user => user.id === currentUser.id);
-            if (userIndex === -1) return false;
-            
-            const user = users[userIndex];
-            
-            // التحقق من كلمة المرور الحالية
-            if (user.password !== hashPassword(currentPassword)) {
-                showError(profileError, 'كلمة المرور الحالية غير صحيحة');
-                return false;
-            }
-            
-            // التحقق من عدم تكرار اسم المستخدم
-            if (username !== user.username && isUsernameTaken(username, currentUser.id)) {
-                showError(profileError, 'اسم المستخدم موجود مسبقاً');
-                return false;
-            }
-            
-            // التحقق من عدم تكرار البريد الإلكتروني
-            if (email !== user.email && isEmailTaken(email, currentUser.id)) {
-                showError(profileError, 'البريد الإلكتروني مسجل مسبقاً');
-                return false;
-            }
-            
-            // تحديث البيانات
-            users[userIndex].username = username;
-            users[userIndex].email = email;
-            
-            // تحديث كلمة المرور إذا تم إدخال واحدة جديدة
-            if (newPassword && newPassword.trim() !== '') {
-                users[userIndex].password = hashPassword(newPassword);
-            }
-            
-            saveUsers();
-            
-            // تحديث المستخدم الحالي
-            currentUser.username = username;
-            currentUser.email = email;
-            saveCurrentUser();
-            
-            return true;
-        }
-        
-        function logoutUser() {
-            currentUser = null;
-            saveCurrentUser();
-            updateUserUI();
-            renderServices();
-            hideProfileSection();
-        }
-        
-        function updateUserUI() {
-            userActions.innerHTML = '';
-            
-            if (currentUser) {
-                // عرض معلومات المستخدم وأزرار التحكم
-                userActions.innerHTML = `
-                    <div class="user-info">
-                        <i class="fas fa-user-circle"></i>
-                        <span>${currentUser.username}</span>
-                        <div class="user-dropdown">
-                            <a href="#" id="viewProfileBtn"><i class="fas fa-user"></i> ملفي الشخصي</a>
-                            <a href="#" id="editProfileBtn"><i class="fas fa-edit"></i> تعديل الملف</a>
-                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-                        </div>
-                    </div>
-                    <button class="add-service-btn" id="openServiceFormBtn">
-                        <i class="fas fa-plus-circle"></i> أضف خدمة
-                    </button>
-                `;
-                
-                // إظهار زر إضافة الخدمة الرئيسي
-                openServiceFormBtnMain.style.display = 'flex';
-                
-                // إضافة مستمعي الأحداث للأزرار الجديدة
-                document.getElementById('openServiceFormBtn').addEventListener('click', () => {
-                    addServiceModal.style.display = 'flex';
-                    serviceForm.reset();
-                    resetImageUpload();
-                });
-                
-                document.getElementById('viewProfileBtn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showProfileSection();
-                });
-                
-                document.getElementById('editProfileBtn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showEditProfileModal();
-                });
-                
-                document.getElementById('logoutBtn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    logoutUser();
-                });
-                
-            } else {
-                // عرض أزرار التسجيل والدخول
-                userActions.innerHTML = `
-                    <div class="auth-buttons">
-                        <button class="btn btn-primary" id="openLoginFormBtn">
-                            <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-                        </button>
-                        <button class="btn btn-secondary" id="openRegisterFormBtn">
-                            <i class="fas fa-user-plus"></i> سجل الآن
-                        </button>
-                    </div>
-                `;
-                
-                // إخفاء زر إضافة الخدمة الرئيسي
-                openServiceFormBtnMain.style.display = 'none';
-                
-                // إضافة مستمعي الأحداث للأزرار الجديدة
-                document.getElementById('openLoginFormBtn').addEventListener('click', () => {
-                    loginModal.style.display = 'flex';
-                    loginFormElement.reset();
-                    hideMessage(loginError);
-                    hideMessage(loginSuccess);
-                });
-                
-                document.getElementById('openRegisterFormBtn').addEventListener('click', () => {
-                    registerModal.style.display = 'flex';
-                    registerFormElement.reset();
-                    hideMessage(registerError);
-                    hideMessage(registerSuccess);
-                });
-            }
-            
-            // إضافة رابط الاتصال
-            const contactLink = document.createElement('a');
-            contactLink.href = 'tel:0506152188';
-            contactLink.className = 'contact-header';
-            contactLink.innerHTML = '<i class="fas fa-phone-alt"></i><span>0506152188</span>';
-            userActions.appendChild(contactLink);
-        }
-        
-        // =================== إدارة الخدمات ===================
-        function loadServices() {
-            const servicesData = localStorage.getItem('services');
-            services = servicesData ? JSON.parse(servicesData) : [];
-        }
-        
-        function saveServices() {
-            localStorage.setItem('services', JSON.stringify(services));
-        }
-        
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const now = new Date();
-            const diffMs = now - date;
-            const diffMins = Math.floor(diffMs / 60000);
-            const diffHours = Math.floor(diffMs / 3600000);
-            const diffDays = Math.floor(diffMs / 86400000);
-            
-            if (diffMins < 1) {
-                return 'الآن';
-            } else if (diffMins < 60) {
-                return `منذ ${diffMins} دقيقة`;
-            } else if (diffHours < 24) {
-                return `منذ ${diffHours} ساعة`;
-            } else if (diffDays < 7) {
-                return `منذ ${diffDays} يوم`;
-            } else {
-                return date.toLocaleDateString('ar-SA', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            }
-        }
-        
-        function renderServices(filteredServices = null) {
-            const servicesToShow = filteredServices || services;
-            
-            // إخفاء أو عرض رسالة عدم وجود خدمات
-            if (servicesToShow.length === 0) {
-                noServicesMessage.style.display = 'block';
-            } else {
-                noServicesMessage.style.display = 'none';
-            }
-            
-            servicesContainer.innerHTML = '';
-            
-            // عرض كل خدمة
-            servicesToShow.forEach(service => {
-                const serviceCard = createServiceCard(service);
-                servicesContainer.appendChild(serviceCard);
-            });
-            
-            // إعادة إضافة رسالة عدم وجود خدمات في النهاية إذا لزم الأمر
-            if (servicesToShow.length === 0) {
-                servicesContainer.appendChild(noServicesMessage);
-            }
-        }
-        
-        function createServiceCard(service) {
-            const card = document.createElement('div');
-            card.className = 'service-card';
-            card.dataset.id = service.id;
-            
-            // التحقق مما إذا كان المستخدم الحالي هو مالك الخدمة
-            const isOwner = currentUser && service.userId === currentUser.id;
-            
-            card.innerHTML = `
-                <div class="service-image">
-                    <img src="${service.image}" alt="${service.title}" onerror="this.src='${getDefaultImage(service.category)}'">
-                </div>
-                <div class="service-content">
-                    <h3>${service.title}</h3>
-                    <p>${service.description}</p>
-                    <div class="service-meta">
-                        <span class="service-category">${service.category}</span>
-                        <span class="service-time">
-                            <i class="far fa-clock"></i> ${formatDate(service.createdAt)}
-                        </span>
-                    </div>
-                    <div class="service-user">
-                        <i class="fas fa-user"></i> ${service.userName}
-                    </div>
-                    <div class="service-price">${service.price} ريال</div>
-                    ${isOwner ? `
-                        <div class="service-actions">
-                            <button class="btn btn-danger delete-service-btn" data-id="${service.id}">
-                                <i class="fas fa-trash"></i> حذف
-                            </button>
-                        </div>
-                    ` : ''}
-                    <a href="tel:${service.contactPhone}" class="contact-btn">
-                        <i class="fas fa-phone-alt"></i> اتصل: ${service.contactPhone}
-                    </a>
-                </div>
+        list.innerHTML = html;
+      });
+
+      onSnapshot(collection(db, 'users'), (snap) => { const list = document.getElementById('usersList'); if (snap.empty) return list.innerHTML = '<p class="text-gray-400 col-span-full text-center py-10">لا يوجد مستخدمين.</p>'; let html = ''; snap.forEach(d => { const u = d.data(); const date = u.createdAt?.toDate().toLocaleDateString('ar-EG') || 'غير معروف'; html += `<div class="card flex flex-col justify-between"><div><h3 class="font-bold text-lg mb-1">${u.name || 'بدون اسم'}</h3><p class="text-gray-400 text-sm mb-1" dir="ltr">${u.email}</p></div><div class="mt-3 pt-3 border-t border-gray-700"><span class="text-xs text-gray-500">تسجيل: ${date}</span></div></div>`; }); list.innerHTML = html; });
+
+      onSnapshot(collection(db, 'orders'), (snap) => {
+        const list = document.getElementById('ordersList'); if (snap.empty) return list.innerHTML = '<p class="text-gray-400 text-center py-10">لا توجد طلبات</p>'; let html = ''; let monthlyRevenue = 0; const now = new Date();
+        snap.forEach(d => {
+          const o = d.data(); const lat = o.location?.lat; const lng = o.location?.lng;
+          if (o.deliveryPaid && o.date) { const orderDate = o.date.toDate(); if (orderDate.getMonth() === now.getMonth() && orderDate.getFullYear() === now.getFullYear()) { monthlyRevenue += (o.deliveryFee || 10); } }
+          let actionBtns = '';
+          if (lat && lng) { const androidUrl = `google.navigation:q=${lat},${lng}`; const iosUrl = `comgooglemaps://?daddr=${lat},${lng}&directionsmode=driving`; const webUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`; actionBtns = `<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-3"><a href="${androidUrl}" class="btn text-xs bg-blue-600 text-white" style="padding:8px; text-decoration:none">أندرويد</a><a href="${iosUrl}" class="btn text-xs bg-purple-600 text-white" style="padding:8px; text-decoration:none">أيفون</a><a href="${webUrl}" target="_blank" class="btn text-xs bg-gray-600 text-white" style="padding:8px; text-decoration:none">ويب</a></div>`; }
+          const paymentLabel = o.paymentMethod === 'transfer' ? `<span class="text-xs bg-red-900/40 text-red-300 px-2 py-1 rounded">تحويل بنكي</span>` : `<span class="text-xs bg-blue-900/40 text-blue-300 px-2 py-1 rounded">كاش</span>`;
+          const deliveryPaidLabel = o.deliveryPaid ? `<span class="text-xs bg-green-900/40 text-green-300 px-2 py-1 rounded">تم الدفع</span>` : `<span class="text-xs bg-yellow-900/40 text-yellow-300 px-2 py-1 rounded">لم يُدفع</span>`;
+
+          let controlBtns = '';
+          if (!o.deliveryPaid) { controlBtns += `<button onclick="payDeliveryBill('${d.id}')" class="btn text-xs bg-purple-600 text-white" style="padding:8px 16px">دفع الحساب</button>`; }
+          if (o.status !== 'completed') { controlBtns += `<button onclick="completeOrder('${d.id}')" class="btn text-xs bg-green-600 text-white" style="padding:8px 16px">إتمام الطلب</button>`; }
+          controlBtns += `<button onclick="deleteOrder('${d.id}')" class="btn text-xs bg-red-600 text-white" style="padding:8px 16px">حذف</button>`;
+
+          const orderDate = formatOrderDate(o.date);
+          const itemsHtml = o.items ? o.items.map(i => { let optStr = i.selectedOption ? ` <span class="text-purple-400">(${i.selectedOption})</span>` : ''; return `<span class="text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded">${i.name}${optStr} x${i.qty}</span>`; }).join(' ') : '';
+
+          // كود عرض الإيصال البنكي كصورة داخل الطلب
+          let receiptHtml = '';
+          if (o.paymentMethod === 'transfer' && o.receiptBase64) {
+            receiptHtml = `
+              <div class="mt-3 p-3 bg-gray-900 rounded-lg border border-dashed border-cyan-500/40">
+                <p class="text-xs text-cyan-400 font-bold mb-2">📎 إيصال التحويل البنكي:</p>
+                <a href="${o.receiptBase64}" target="_blank" download="receipt_${d.id}.jpg">
+                  <img src="${o.receiptBase64}" class="receipt-preview" alt="إيصال التحويل">
+                </a>
+                <p class="text-xs text-gray-500 mt-1 text-center">اضغط على الصورة لتكبيرها أو تنزيلها</p>
+              </div>
             `;
-            
-            return card;
-        }
-        
-        function addService(serviceData) {
-            if (!currentUser) {
-                showError(addServiceError, 'يجب تسجيل الدخول أولاً');
-                return false;
-            }
-            
-            const newService = {
-                id: Date.now(),
-                userId: currentUser.id,
-                userName: currentUser.username,
-                ...serviceData,
-                createdAt: new Date().toISOString()
-            };
-            
-            services.unshift(newService);
-            saveServices();
-            renderServices();
-            
-            return true;
-        }
-        
-        function deleteService(serviceId) {
-            if (!currentUser) return false;
-            
-            const serviceIndex = services.findIndex(service => service.id === serviceId);
-            if (serviceIndex === -1) return false;
-            
-            // التحقق من أن المستخدم الحالي هو مالك الخدمة
-            if (services[serviceIndex].userId !== currentUser.id) {
-                alert('لا يمكنك حذف خدمة لا تملكها');
-                return false;
-            }
-            
-            if (confirm('هل أنت متأكد من حذف هذه الخدمة؟')) {
-                services.splice(serviceIndex, 1);
-                saveServices();
-                renderServices();
-                return true;
-            }
-            
-            return false;
-        }
-        
-        function getDefaultImage(category) {
-            const images = {
-                'تقنية': 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',
-                'تعليمية': 'https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',
-                'منزلية': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',
-                'تصميم': 'https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',
-                'كتابة وترجمة': 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',
-                'صيانة': 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                'أخرى': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-            };
-            
-            return images[category] || images['أخرى'];
-        }
-        
-        // =================== عرض الملف الشخصي ===================
-        function showProfileSection() {
-            if (!currentUser) return;
-            
-            // حساب عدد خدمات المستخدم
-            const userServices = services.filter(service => service.userId === currentUser.id);
-            
-            profileContainer.innerHTML = `
-                <div class="profile-header">
-                    <div class="profile-avatar">
-                        ${currentUser.username.charAt(0).toUpperCase()}
-                    </div>
-                    <div class="profile-info">
-                        <h2>${currentUser.username}</h2>
-                        <p>${currentUser.email}</p>
-                        <p>عضو في سوق الخدمات</p>
-                    </div>
-                </div>
-                
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <span class="number">${userServices.length}</span>
-                        <span class="label">الخدمات المنشورة</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">${users.length}</span>
-                        <span class="label">إجمالي المستخدمين</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">${services.length}</span>
-                        <span class="label">إجمالي الخدمات</span>
-                    </div>
-                </div>
-                
-                <h3 style="color: var(--primary-color); margin-bottom: 20px;">خدماتي المنشورة</h3>
-                <div id="userServicesContainer">
-                    ${userServices.length > 0 ? 
-                        userServices.map(service => `
-                            <div class="service-card" style="margin-bottom: 15px;">
-                                <div class="service-content">
-                                    <h3>${service.title}</h3>
-                                    <p>${service.description.substring(0, 100)}...</p>
-                                    <div class="service-meta">
-                                        <span class="service-category">${service.category}</span>
-                                        <span class="service-price">${service.price} ريال</span>
-                                    </div>
-                                    <div class="service-time">
-                                        <i class="far fa-clock"></i> ${formatDate(service.createdAt)}
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('') : 
-                        '<p style="text-align: center; color: var(--gray-color);">لم تقم بنشر أي خدمات بعد.</p>'
-                    }
-                </div>
-            `;
-            
-            profileSection.style.display = 'block';
-            profileSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function hideProfileSection() {
-            profileSection.style.display = 'none';
-        }
-        
-        function showEditProfileModal() {
-            if (!currentUser) return;
-            
-            // تعبئة الحقول ببيانات المستخدم الحالية
-            document.getElementById('profileUsername').value = currentUser.username;
-            document.getElementById('profileEmail').value = currentUser.email;
-            document.getElementById('currentPassword').value = '';
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmNewPassword').value = '';
-            
-            hideMessage(profileError);
-            hideMessage(profileSuccess);
-            
-            profileModal.style.display = 'flex';
-        }
-        
-        // =================== معالجة النماذج ===================
-        function setupEventListeners() {
-            // إغلاق النماذج
-            closeServiceModal.addEventListener('click', () => addServiceModal.style.display = 'none');
-            closeLoginModal.addEventListener('click', () => loginModal.style.display = 'none');
-            closeRegisterModal.addEventListener('click', () => registerModal.style.display = 'none');
-            closeProfileModal.addEventListener('click', () => profileModal.style.display = 'none');
-            
-            // زر إضافة الخدمة الرئيسي
-            openServiceFormBtnMain.addEventListener('click', () => {
-                if (!currentUser) {
-                    showError(addServiceError, 'يجب تسجيل الدخول أولاً');
-                    loginModal.style.display = 'flex';
-                    return;
-                }
-                
-                addServiceModal.style.display = 'flex';
-                serviceForm.reset();
-                resetImageUpload();
-            });
-            
-            // إغلاق النماذج عند النقر خارجها
-            addServiceModal.addEventListener('click', (e) => {
-                if (e.target === addServiceModal) addServiceModal.style.display = 'none';
-            });
-            
-            loginModal.addEventListener('click', (e) => {
-                if (e.target === loginModal) loginModal.style.display = 'none';
-            });
-            
-            registerModal.addEventListener('click', (e) => {
-                if (e.target === registerModal) registerModal.style.display = 'none';
-            });
-            
-            profileModal.addEventListener('click', (e) => {
-                if (e.target === profileModal) profileModal.style.display = 'none';
-            });
-            
-            // الانتقال بين نماذج التسجيل والدخول
-            document.getElementById('switchToRegister').addEventListener('click', (e) => {
-                e.preventDefault();
-                loginModal.style.display = 'none';
-                registerModal.style.display = 'flex';
-                registerFormElement.reset();
-                hideMessage(registerError);
-                hideMessage(registerSuccess);
-            });
-            
-            document.getElementById('switchToLogin').addEventListener('click', (e) => {
-                e.preventDefault();
-                registerModal.style.display = 'none';
-                loginModal.style.display = 'flex';
-                loginFormElement.reset();
-                hideMessage(loginError);
-                hideMessage(loginSuccess);
-            });
-            
-            // إدارة رفع الصور
-            imageUploadContainer.addEventListener('click', () => serviceImageInput.click());
-            
-            serviceImageInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    // التحقق من حجم الملف (5MB كحد أقصى)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('حجم الصورة كبير جداً! الحد الأقصى 5MB.');
-                        return;
-                    }
-                    
-                    // التحقق من نوع الملف
-                    if (!file.type.match('image/jpeg') && !file.type.match('image/png') && !file.type.match('image/jpg')) {
-                        alert('صيغة الملف غير مدعومة! الرجاء رفع صورة بصيغة JPG أو PNG.');
-                        return;
-                    }
-                    
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                        removeImageBtn.style.display = 'block';
-                        imageUploadContainer.classList.add('has-image');
-                        imageUploadContainer.querySelector('i').style.display = 'none';
-                        imageUploadContainer.querySelector('p').style.display = 'none';
-                        imageUploadContainer.querySelector('small').style.display = 'none';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // إزالة الصورة المرفوعة
-            removeImageBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                resetImageUpload();
-            });
-            
-            // عرض/إخفاء كلمة المرور
-            document.getElementById('toggleLoginPassword').addEventListener('click', function() {
-                togglePasswordVisibility('loginPassword', this);
-            });
-            
-            document.getElementById('toggleRegisterPassword').addEventListener('click', function() {
-                togglePasswordVisibility('registerPassword', this);
-            });
-            
-            document.getElementById('toggleRegisterConfirmPassword').addEventListener('click', function() {
-                togglePasswordVisibility('registerConfirmPassword', this);
-            });
-            
-            document.getElementById('toggleCurrentPassword').addEventListener('click', function() {
-                togglePasswordVisibility('currentPassword', this);
-            });
-            
-            document.getElementById('toggleNewPassword').addEventListener('click', function() {
-                togglePasswordVisibility('newPassword', this);
-            });
-            
-            document.getElementById('toggleConfirmNewPassword').addEventListener('click', function() {
-                togglePasswordVisibility('confirmNewPassword', this);
-            });
-            
-            // إرسال النماذج
-            loginFormElement.addEventListener('submit', handleLogin);
-            registerFormElement.addEventListener('submit', handleRegister);
-            serviceForm.addEventListener('submit', handleAddService);
-            profileFormElement.addEventListener('submit', handleEditProfile);
-            
-            // البحث
-            searchButton.addEventListener('click', performSearch);
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') performSearch();
-            });
-            
-            // حذف الخدمات (يتم إضافة المستمع عند إنشاء البطاقة)
-            servicesContainer.addEventListener('click', function(e) {
-                if (e.target.classList.contains('delete-service-btn') || e.target.closest('.delete-service-btn')) {
-                    const button = e.target.classList.contains('delete-service-btn') ? e.target : e.target.closest('.delete-service-btn');
-                    const serviceId = parseInt(button.dataset.id);
-                    deleteService(serviceId);
-                }
-            });
-        }
-        
-        function togglePasswordVisibility(passwordFieldId, button) {
-            const passwordField = document.getElementById(passwordFieldId);
-            const icon = button.querySelector('i');
-            
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordField.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-        
-        function resetImageUpload() {
-            serviceImageInput.value = '';
-            imagePreview.src = '';
-            imagePreview.style.display = 'none';
-            removeImageBtn.style.display = 'none';
-            imageUploadContainer.classList.remove('has-image');
-            imageUploadContainer.querySelector('i').style.display = 'block';
-            imageUploadContainer.querySelector('p').style.display = 'block';
-            imageUploadContainer.querySelector('small').style.display = 'block';
-        }
-        
-        function handleLogin(e) {
-            e.preventDefault();
-            hideMessage(loginError);
-            hideMessage(loginSuccess);
-            
-            const identifier = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            
-            if (!identifier || !password) {
-                showError(loginError, 'الرجاء تعبئة جميع الحقول');
-                return;
-            }
-            
-            loginUser(identifier, password);
-        }
-        
-        function handleRegister(e) {
-            e.preventDefault();
-            hideMessage(registerError);
-            hideMessage(registerSuccess);
-            
-            const username = document.getElementById('registerUsername').value.trim();
-            const email = document.getElementById('registerEmail').value.trim();
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            
-            // التحقق من صحة البيانات
-            if (!username || !email || !password || !confirmPassword) {
-                showError(registerError, 'الرجاء تعبئة جميع الحقول');
-                return;
-            }
-            
-            if (password.length < 8) {
-                showError(registerError, 'كلمة المرور يجب أن تكون 8 أحرف على الأقل');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showError(registerError, 'كلمتا المرور غير متطابقتين');
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                showError(registerError, 'البريد الإلكتروني غير صالح');
-                return;
-            }
-            
-            const success = registerUser(username, email, password);
-            if (success) {
-                registerModal.style.display = 'none';
-                showSuccess(registerSuccess, 'تم إنشاء الحساب بنجاح!');
-            }
-        }
-        
-        function handleAddService(e) {
-            e.preventDefault();
-            hideMessage(addServiceError);
-            
-            if (!currentUser) {
-                showError(addServiceError, 'يجب تسجيل الدخول أولاً');
-                return;
-            }
-            
-            const title = document.getElementById('serviceTitle').value.trim();
-            const description = document.getElementById('serviceDescription').value.trim();
-            const category = document.getElementById('serviceCategory').value;
-            const price = document.getElementById('servicePrice').value;
-            const contactPhone = document.getElementById('contactPhone').value.trim();
-            
-            // التحقق من صحة البيانات
-            if (!title || !description || !category || !price || !contactPhone) {
-                showError(addServiceError, 'الرجاء تعبئة جميع الحقول المطلوبة');
-                return;
-            }
-            
-            if (isNaN(price) || parseFloat(price) <= 0) {
-                showError(addServiceError, 'السعر يجب أن يكون رقماً صحيحاً');
-                return;
-            }
-            
-            // معالجة الصورة
-            let imageData = '';
-            if (serviceImageInput.files && serviceImageInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imageData = e.target.result;
-                    completeServiceAddition(title, description, category, price, contactPhone, imageData);
-                };
-                reader.readAsDataURL(serviceImageInput.files[0]);
-            } else {
-                completeServiceAddition(title, description, category, price, contactPhone, '');
-            }
-        }
-        
-        function completeServiceAddition(title, description, category, price, contactPhone, imageData) {
-            const serviceData = {
-                title,
-                description,
-                category,
-                price: parseInt(price),
-                contactPhone,
-                image: imageData || getDefaultImage(category)
-            };
-            
-            const success = addService(serviceData);
-            if (success) {
-                addServiceModal.style.display = 'none';
-                serviceForm.reset();
-                resetImageUpload();
-                alert('تم إضافة خدمتك بنجاح!');
-            }
-        }
-        
-        function handleEditProfile(e) {
-            e.preventDefault();
-            hideMessage(profileError);
-            hideMessage(profileSuccess);
-            
-            const username = document.getElementById('profileUsername').value.trim();
-            const email = document.getElementById('profileEmail').value.trim();
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
-            
-            // التحقق من صحة البيانات
-            if (!username || !email || !currentPassword) {
-                showError(profileError, 'الرجاء تعبئة جميع الحقول المطلوبة');
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                showError(profileError, 'البريد الإلكتروني غير صالح');
-                return;
-            }
-            
-            // التحقق من كلمة المرور الجديدة إذا تم إدخالها
-            if (newPassword && newPassword.trim() !== '') {
-                if (newPassword.length < 8) {
-                    showError(profileError, 'كلمة المرور الجديدة يجب أن تكون 8 أحرف على الأقل');
-                    return;
-                }
-                
-                if (newPassword !== confirmNewPassword) {
-                    showError(profileError, 'كلمتا المرور الجديدة غير متطابقتين');
-                    return;
-                }
-            }
-            
-            const success = updateUserProfile(username, email, currentPassword, newPassword);
-            if (success) {
-                profileModal.style.display = 'none';
-                showProfileSection();
-                alert('تم تحديث الملف الشخصي بنجاح!');
-            }
-        }
-        
-        function performSearch() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                renderServices();
-                return;
-            }
-            
-            const filteredServices = services.filter(service => 
-                service.title.toLowerCase().includes(searchTerm) || 
-                service.description.toLowerCase().includes(searchTerm) ||
-                service.category.toLowerCase().includes(searchTerm) ||
-                service.userName.toLowerCase().includes(searchTerm)
-            );
-            
-            renderServices(filteredServices);
-        }
-        
-        // =================== دوال مساعدة ===================
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-        
-        function showError(element, message) {
-            element.textContent = message;
-            element.style.display = 'block';
-            setTimeout(() => {
-                element.style.display = 'none';
-            }, 5000);
-        }
-        
-        function showSuccess(element, message) {
-            element.textContent = message;
-            element.style.display = 'block';
-            setTimeout(() => {
-                element.style.display = 'none';
-            }, 5000);
-        }
-        
-        function hideMessage(element) {
-            element.style.display = 'none';
-        }
-    </script>
+          }
+
+          html += `<div class="card mb-4">
+            <div class="flex justify-between items-start mb-3 flex-wrap gap-2">
+              <div><h3 class="font-bold text-white">${o.name || 'بدون اسم'}</h3><p class="text-sm text-gray-400" dir="ltr">${o.phone || ''}</p><p class="text-xs text-gray-500 mt-1">${o.addressText || ''}</p></div>
+              <div class="text-left"><p class="font-bold text-green-400 text-lg">${o.total || 0} ريال</p><p class="text-xs text-gray-400 mt-1" style="max-width: 200px; text-align: left;">${orderDate}</p></div>
+            </div>
+            <div class="mb-3 flex flex-wrap gap-1">${itemsHtml}</div>
+            ${receiptHtml}
+            <div class="flex gap-2 flex-wrap mb-3 mt-2">${paymentLabel} ${deliveryPaidLabel}</div>
+            ${actionBtns}
+            <div class="flex gap-2 flex-wrap mt-3">${controlBtns}</div>
+          </div>`;
+        });
+        list.innerHTML = html; document.getElementById('monthlyDeliveryRevenue').textContent = monthlyRevenue + ' ريال';
+      });
+    }
+
+    window.handleAddProduct = async (e) => { e.preventDefault(); const btn = document.getElementById('addBtn'); btn.textContent = 'جاري الإضافة...'; btn.disabled = true; const optionName = document.getElementById('pOptionName').value.trim(); const optionValuesStr = document.getElementById('pOptionValues').value.trim(); const optionsArray = optionValuesStr ? optionValuesStr.split(',').map(v => v.trim()).filter(v => v) : []; try { await addDoc(collection(db, 'products'), { storeType: document.getElementById('pStoreType').value, name: document.getElementById('pName').value, price: document.getElementById('pPrice').value, category: document.getElementById('pCategory').value, image: document.getElementById('pImage').value, optionName: optionName || null, options: optionsArray }); e.target.reset(); alert('تم إضافة المنتج بنجاح'); } catch (err) { alert('خطأ في الإضافة: ' + err.message); } finally { btn.textContent = 'إضافة المنتج'; btn.disabled = false; } };
+    window.deleteProd = async (id) => { if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) { try { await deleteDoc(doc(db, 'products', id)); } catch (e) { alert('خطأ في الحذف'); } } };
+
+    window.openEditModal = (id) => { const p = cachedProducts.find(x => x.id === id); if (!p) return; document.getElementById('editId').value = id; document.getElementById('editStoreType').value = p.storeType || 'market'; document.getElementById('editName').value = p.name || ''; document.getElementById('editPrice').value = p.price || ''; document.getElementById('editCategory').value = p.category || 'drinks'; document.getElementById('editImage').value = p.image || ''; document.getElementById('editOptionName').value = p.optionName || ''; document.getElementById('editOptionValues').value = (p.options && p.options.length > 0) ? p.options.join(', ') : ''; document.getElementById('editModal').classList.add('open'); };
+    window.closeEditModal = () => { document.getElementById('editModal').classList.remove('open'); };
+
+    window.handleUpdateProduct = async (e) => { e.preventDefault(); const id = document.getElementById('editId').value; const optionName = document.getElementById('editOptionName').value.trim(); const optionValuesStr = document.getElementById('editOptionValues').value.trim(); const optionsArray = optionValuesStr ? optionValuesStr.split(',').map(v => v.trim()).filter(v => v) : []; try { await updateDoc(doc(db, 'products', id), { storeType: document.getElementById('editStoreType').value, name: document.getElementById('editName').value, price: document.getElementById('editPrice').value, category: document.getElementById('editCategory').value, image: document.getElementById('editImage').value, optionName: optionName || null, options: optionsArray }); closeEditModal(); alert('تم تحديث المنتج بنجاح'); } catch (err) { alert('خطأ في التحديث: ' + err.message); } };
+
+    window.payDeliveryBill = async (id) => { try { await updateDoc(doc(db, 'orders', id), { deliveryPaid: true }); } catch (e) { alert('خطأ'); } };
+    window.completeOrder = async (id) => { try { await updateDoc(doc(db, 'orders', id), { status: 'completed' }); } catch (e) { alert('خطأ'); } };
+    window.deleteOrder = async (id) => { if (confirm('هل تريد حذف هذا الطلب نهائياً؟')) { try { await deleteDoc(doc(db, 'orders', id)); } catch (e) { alert('خطأ في حذف الطلب'); } } };
+  </script>
 </body>
+
 </html>
